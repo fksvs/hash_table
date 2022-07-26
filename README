@@ -1,9 +1,12 @@
 A simple Hash Table implementation with C
 -----------------------------------------
 
+--you can find a example usage in main.c
+
 --creating and deleting a hash table
 
      hash_table *create_table(size_t table_size);
+
      void delete_table(hash_table *table,size_t table_size);
 
 --add data with a key (key and data is (void *),\
@@ -22,8 +25,6 @@ A simple Hash Table implementation with C
 
      hash_table *search_entry(hash_table *table,size_t table_size,\
              void *key,size_t key_size);
-
---you can find a example code in main.c
 
 --data structures
 
