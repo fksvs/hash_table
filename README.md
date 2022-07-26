@@ -1,7 +1,7 @@
 Hash Table
 ---
 
-**you can find a example usage in main.c**
+**you can find a example usage in `main.c`**
 
 ### creating and deleting a hash table
 
