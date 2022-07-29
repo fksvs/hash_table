@@ -3,9 +3,9 @@ Hash Table
 
 **you can find a example usage in `main.c`**
 
-### creating and deleting a hash table
+### initializing and deleting a hash table
 
-     hash_table *create_table(size_t table_size);
+     hash_table *init_table(size_t table_size);
 
      void delete_table(hash_table *table);
 

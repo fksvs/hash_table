@@ -22,7 +22,7 @@ typedef struct {
 	int flag;
 } hash_table;
 
-hash_table *create_table(size_t table_size);
+hash_table *init_table(size_t table_size);
 void delete_table(hash_table *table);
 
 unsigned long hash_func(hash_table *table, void *key, size_t key_size);

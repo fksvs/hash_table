@@ -2,7 +2,7 @@
 #include <string.h>
 #include "hash_table.h"
 
-hash_table *create_table(size_t table_size)
+hash_table *init_table(size_t table_size)
 {
 	hash_table *table = malloc(table_size * sizeof(hash_table));
 	memset(table, 0, table_size * sizeof(hash_table));

@@ -12,21 +12,22 @@ int cmp(void *a, void *b)
 	return strcmp((char *)a, (char *)b);
 }
 
-//basic usage of lib
+// basic usage of hash table
 void test()
 {
-	//create a table
-	hash_table *table = create_table(TABLE_SIZE);
+	// initialize the table
+	hash_table *table = init_table(TABLE_SIZE);
 
         printf("table size = %d\n", table->table_size);
-	//add data via key
+	
+        // add data via key
 	add_entry(table, "key1", KEY_SIZE, "data1", DATA_SIZE, &cmp);
 	add_entry(table, "key2", KEY_SIZE, "data2", DATA_SIZE, &cmp);
 	add_entry(table, "key3", KEY_SIZE, "data3", DATA_SIZE, &cmp);
 	add_entry(table, "key4", KEY_SIZE, "data4", DATA_SIZE, &cmp);
 	add_entry(table, "key5", KEY_SIZE, "data5", DATA_SIZE, &cmp);
 
-	//search entries
+	// search entries vie key
 	hash_table *temp;
 	
         temp = search_entry(table, "key1", KEY_SIZE);
@@ -44,11 +45,11 @@ void test()
         temp = search_entry(table, "key5", KEY_SIZE);
 	printf("key=%s\tdata=%s\n", (char *)temp->value->key, (char *)temp->value->data);
 
-	//delete entries
+	// delete entries via key
 	del_entry(table, "key1", KEY_SIZE);
 	del_entry(table, "key3", KEY_SIZE);
 
-	//delete hash table
+	// delete hash table completely
 	delete_table(table);
 }
 
