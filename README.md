@@ -13,17 +13,17 @@ Hash Table
 
 >key and data is (void *), so you can use any type for key and data
 
-     hash_table *add_entry(hash_table *table, void *key,size_t key_size,
-             void *data,size_t data_size,
+     hash_table *add_entry(hash_table *table, void *key, size_t key_size,
+             void *data, size_t data_size,
              int (*cmp)(void *a,void *b));
 
 ### delete data with a key
 
-     hash_table *del_entry(hash_table *table, void *key,size_t key_size);
+     hash_table *del_entry(hash_table *table, void *key, size_t key_size);
 
 ### search entry with a key
 
-     hash_table *search_entry(hash_table *table, void *key,size_t key_size);
+     hash_table *search_entry(hash_table *table, void *key, size_t key_size);
 
 ### data structures
 
