@@ -16,26 +16,25 @@ typedef struct {
 } entry;
 
 typedef struct {
+        size_t table_size;
 	entry *value;
 	int (*cmp)(void *a, void *b);
 	int flag;
 } hash_table;
 
 hash_table *create_table(size_t table_size);
-void delete_table(hash_table *table, size_t table_size);
+void delete_table(hash_table *table);
 
-unsigned long hash_func(void *key, size_t key_size, size_t table_size);
+unsigned long hash_func(hash_table *table, void *key, size_t key_size);
 
-hash_table *search_entry(hash_table *table, size_t table_size, void *key,
-			 size_t key_size);
+hash_table *search_entry(hash_table *table, void *key, size_t key_size);
 
 void delete_entry(entry *value);
-hash_table *del_entry(hash_table *table, size_t table_size, void *key,
-		      size_t key_size);
+hash_table *del_entry(hash_table *table, void *key, size_t key_size);
 
 entry *create_entry(void *key, size_t key_size, void *data, size_t data_size);
-hash_table *add_entry(hash_table *table, size_t table_size, void *key,
-		      size_t key_size, void *data, size_t data_size,
+hash_table *add_entry(hash_table *table, void *key, size_t key_size, 
+                      void *data, size_t data_size,
 		      int (*cmp)(void *a, void *b));
 
 #endif

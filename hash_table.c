@@ -6,13 +6,15 @@ hash_table *create_table(size_t table_size)
 {
 	hash_table *table = malloc(table_size * sizeof(hash_table));
 	memset(table, 0, table_size * sizeof(hash_table));
-	return table;
+	table->table_size=table_size;
+
+        return table;
 }
 
-void delete_table(hash_table *table, size_t table_size)
+void delete_table(hash_table *table)
 {
 	int ind;
-	for (ind = 0; ind < table_size; ind += 1) {
+	for (ind = 0; ind < table->table_size; ind += 1) {
 		if ((table + ind)->flag == FULL) {
 			free((table + ind)->value->key);
 			free((table + ind)->value->data);
@@ -22,7 +24,7 @@ void delete_table(hash_table *table, size_t table_size)
 	free(table);
 }
 
-unsigned long hash_func(void *key, size_t key_size, size_t table_size)
+unsigned long hash_func(hash_table *table, void *key, size_t key_size)
 {
 	unsigned long hash = 0;
 	int ind = 0;
@@ -32,22 +34,20 @@ unsigned long hash_func(void *key, size_t key_size, size_t table_size)
 		hash ^= *(char *)(key + ind);
 		hash *= FNV_PRIME;
 	}
-	return hash % table_size;
+	return hash % table->table_size;
 }
 
-hash_table *search_entry(hash_table *table, size_t table_size, void *key,
-			 size_t key_size)
+hash_table *search_entry(hash_table *table, void *key, size_t key_size)
 {
-	int ind, hash_ind = hash_func(key, key_size, table_size);
+	int ind, hash_ind = hash_func(table, key, key_size);
 	ind = hash_ind;
 
 	while ((table + ind)->flag != EMPTY) {
 		if ((table + ind)->flag == FULL) {
-			if ((table + ind)->cmp((table + ind)->value->key, key) ==
-			    0)
+			if ((table + ind)->cmp((table + ind)->value->key, key) == 0)
 				return (table + ind);
 		}
-		ind = (ind + 1) % table_size;
+		ind = (ind + 1) % table->table_size;
 		if (ind == hash_ind)
 			break;
 	}
@@ -61,10 +61,9 @@ void delete_entry(entry *value)
 	free(value);
 }
 
-hash_table *del_entry(hash_table *table, size_t table_size, void *key,
-		      size_t key_size)
+hash_table *del_entry(hash_table *table, void *key, size_t key_size)
 {
-	hash_table *temp = search_entry(table, table_size, key, key_size);
+	hash_table *temp = search_entry(table, key, key_size);
 	if (temp != NULL) {
 		delete_entry(temp->value);
 		temp->value = NULL;
@@ -89,11 +88,11 @@ entry *create_entry(void *key, size_t key_size, void *data, size_t data_size)
 	return value;
 }
 
-hash_table *add_entry(hash_table *table, size_t table_size, void *key,
-		      size_t key_size, void *data, size_t data_size,
+hash_table *add_entry(hash_table *table, void *key, size_t key_size,
+                      void *data, size_t data_size,
 		      int (*cmp)(void *a, void *b))
 {
-	int ind, hash_ind = hash_func(key, key_size, table_size);
+	int ind, hash_ind = hash_func(table, key, key_size);
 	ind = hash_ind;
 
 	while ((table + ind)->flag == FULL) {
@@ -101,7 +100,7 @@ hash_table *add_entry(hash_table *table, size_t table_size, void *key,
 			delete_entry((table + ind)->value);
 			break;
 		}
-		ind = (ind + 1) % table_size;
+		ind = (ind + 1) % table->table_size;
 		if (ind == hash_ind)
 			return NULL;
 	}
