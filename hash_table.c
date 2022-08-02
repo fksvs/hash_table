@@ -6,7 +6,7 @@ hash_table *init_table(size_t table_size)
 {
 	hash_table *table = malloc(table_size * sizeof(hash_table));
 	memset(table, 0, table_size * sizeof(hash_table));
-	table->table_size=table_size;
+	table->table_size = table_size;
 
         return table;
 }

@@ -11,8 +11,6 @@ Hash Table
 
 ### add data with a key 
 
->key and data is (void *), so you can use any type for key and data
-
      hash_table *add_entry(hash_table *table, void *key, size_t key_size,
              void *data, size_t data_size,
              int (*cmp)(void *a,void *b));
@@ -27,7 +25,7 @@ Hash Table
 
 ### data structures
 
-  #### entry
+#### entry
 
      typedef struct{
          void *key;
@@ -36,7 +34,7 @@ Hash Table
          size_t data_size;
      } entry;
 
-  #### hash table
+#### hash table
 
      typedef struct{
          size_t table_size;

@@ -17,7 +17,6 @@ void test()
 {
 	// initialize the table
 	hash_table *table = init_table(TABLE_SIZE);
-
         printf("table size = %d\n", table->table_size);
 	
         // add data via key
@@ -27,7 +26,7 @@ void test()
 	add_entry(table, "key4", KEY_SIZE, "data4", DATA_SIZE, &cmp);
 	add_entry(table, "key5", KEY_SIZE, "data5", DATA_SIZE, &cmp);
 
-	// search entries vie key
+	// search entries with key
 	hash_table *temp;
 	
         temp = search_entry(table, "key1", KEY_SIZE);
@@ -45,7 +44,7 @@ void test()
         temp = search_entry(table, "key5", KEY_SIZE);
 	printf("key=%s\tdata=%s\n", (char *)temp->value->key, (char *)temp->value->data);
 
-	// delete entries via key
+	// delete entries with key
 	del_entry(table, "key1", KEY_SIZE);
 	del_entry(table, "key3", KEY_SIZE);
 
